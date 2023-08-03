@@ -71,12 +71,14 @@ const DashboardHome = () => {
         initialValues: originalValues,
         validationSchema: validationSchema,
         onSubmit: async (values) => {
+            setIsLoading(true)
             try {
                 // Make the POST API call here
                 const response = await axios.post('https://ulventech-react-exam.netlify.app/api/form', values);
                 console.log(response);
                 if (response.data.success) {
                     router.push('/dashboard/submit-success')
+                    setTimeout(() => setIsLoading(false), 1000)
                 }
                 // Handle the response here (if needed)
 
